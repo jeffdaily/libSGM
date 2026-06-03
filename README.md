@@ -49,6 +49,17 @@ $ cmake ../  # Several options available
 $ make
 ```
 
+### Building for AMD GPUs (ROCm/HIP)
+
+libSGM also builds on AMD GPUs through ROCm/HIP. With a ROCm toolchain installed, configure with `-DUSE_HIP=ON`:
+
+```
+$ cmake .. -DUSE_HIP=ON
+$ make
+```
+
+The GPU architecture is auto-detected from the build machine; target another AMD GPU with `-DCMAKE_HIP_ARCHITECTURES=<arch>` (e.g. `gfx90a`, `gfx1100`). The CUDA build path is unchanged (`USE_HIP=OFF`).
+
 ## Sample Execution
 ```
 $ pwd
