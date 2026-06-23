@@ -7,14 +7,9 @@ set(LIBSGM_INCLUDE_DIR ${LIBSGM_ROOT_DIR}/include)
 set(PROJECT_NAME sgm)
 if(USE_HIP)
 	project(${PROJECT_NAME} LANGUAGES CXX)
+	# enable_language(HIP) honors -DCMAKE_HIP_ARCHITECTURES, otherwise auto-detects
+	# the host GPU and errors on a no-GPU build host.
 	enable_language(HIP)
-	# enable_language(HIP) auto-detects the installed GPU(s) into
-	# CMAKE_HIP_ARCHITECTURES; fall back to gfx90a only if nothing was detected.
-	# -DCMAKE_HIP_ARCHITECTURES=<arch> overrides both.
-	if(NOT CMAKE_HIP_ARCHITECTURES)
-		set(CMAKE_HIP_ARCHITECTURES "gfx90a")
-	endif()
-	list(REMOVE_DUPLICATES CMAKE_HIP_ARCHITECTURES)
 else()
 	project(${PROJECT_NAME} LANGUAGES CXX CUDA)
 endif()

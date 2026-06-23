@@ -7,8 +7,8 @@ option(LIBSGM_SHARED        "Build a shared library" OFF)
 option(BUILD_OPENCV_WRAPPER "Make library compatible with cv::Mat and cv::cuda::GpuMat of OpenCV" OFF)
 option(USE_HIP              "Build the GPU kernels with ROCm/HIP instead of CUDA" OFF)
 
-# For HIP the architecture is auto-detected by enable_language(HIP) in src/, with
-# a gfx90a fallback there; -DCMAKE_HIP_ARCHITECTURES overrides it.
+# For HIP the architecture is handled by enable_language(HIP) in src/, which
+# auto-detects the host GPU; -DCMAKE_HIP_ARCHITECTURES overrides it.
 if(NOT USE_HIP)
     if(NOT DEFINED CMAKE_CUDA_ARCHITECTURES)
         set(CMAKE_CUDA_ARCHITECTURES "52;61;72;75;86")
